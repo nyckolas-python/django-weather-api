@@ -3,5 +3,5 @@ from api import views
 
 
 urlpatterns = [
-    # path('api/v1/weather/', views.WeatherView.as_view()),
+    path('v1/forecast/', views.WeathersListView.as_view()),
 ]
