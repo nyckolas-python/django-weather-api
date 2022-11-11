@@ -2,9 +2,18 @@
 __pycache__/
 *.py[cod]
 *$py.class
+pgadmin/
+pgdata/
+data/
+migrations/
+*/media/*
 
 # C extensions
 *.so
+
+# images
+!*/static/media/.gitkeep
+*/static/media/*
 
 # Distribution / packaging
 .Python
