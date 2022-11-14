@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -18,13 +17,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 #         max_length=2, choices=STATUS_CHOICES, default=SCHEDULED, null=True)
 
 class Weather(models.Model):
-    date = models.DateTimeField(auto_now_add=True, null=True)
-    temperature = models.SmallIntegerField(null=True,
-        validators=[
-            MaxValueValidator(100),
-            MinValueValidator(-100)
-        ]
-    )
+    date = models.DateField(unique=True)
+    temperature = models.CharField(max_length=5, null=True)
     weather_description = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -34,4 +28,5 @@ class Weather(models.Model):
         return super().save(*args, **kwargs)
     
     def __str__(self) -> str:
-        return f"{self.date}: {self.temperature} {self.weather_description} - {self.updated_at}"
+        # return f"Weather forecast for {self.date}: {self.temperature} {self.weather_description} - updated: {self.updated_at.strftime('%d/%m %H:%M')}"
+        return f"Weather forecast for {self.date}"
