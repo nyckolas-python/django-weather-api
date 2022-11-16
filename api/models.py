@@ -17,7 +17,7 @@ from django.utils import timezone
 #         max_length=2, choices=STATUS_CHOICES, default=SCHEDULED, null=True)
 
 class Weather(models.Model):
-    date = models.DateField(unique=True)
+    date = models.DateField(primary_key=True)
     temperature = models.CharField(max_length=5, null=True)
     weather_description = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
