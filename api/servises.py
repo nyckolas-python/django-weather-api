@@ -3,10 +3,8 @@ from bs4 import BeautifulSoup as bs
 from datetime import datetime
 from typing import List
 
-from api.models import Weather
 
-
-def scrap_weather_info() -> List[dict]:
+def _scrap_weather_info() -> List[dict]:
     """The function parses and returns weather data from the site:
     https://pogoda.meta.ua/ua/Kyivska/Kyivskiy/Kyiv/week/
     
@@ -54,16 +52,6 @@ def scrap_weather_info() -> List[dict]:
     except Exception as ex:
         print(f"[IFNO] Can't parse weather data.\n{ex}")
 
-def update_or_create_weather_task():
-    forecast_json = scrap_weather_info()
-    for data in forecast_json:
-        instance, created = Weather.objects.update_or_create(**data, defaults=data)
-        if created:
-            print(f"{instance}\nWas created")
-        else:
-            print(f"{instance}\nWas updated")
-    return True
 
-
-if __name__ == '__main__':
-    update_or_create_weather_task()
+# if __name__ == '__main__':
+#     scrap_weather_info()
