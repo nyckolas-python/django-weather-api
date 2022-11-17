@@ -24,9 +24,10 @@ def update_or_create_weather_task(self):
     for day, data in enumerate(forecast_json):
         self.update_state(state='PROGRESS',
                 meta={'current day': day, 'total': len(forecast_json)})
-        instance, created = Weather.objects.update_or_create(**data, defaults=data)
+        instance, created = Weather.objects.update_or_create(date=data['date'], defaults=data)
         if instance:
-            self.update_state(state='Done')
+            self.update_state(state='Done',
+                meta={'total': len(forecast_json)})
         if created:
             print(f"\n{instance}\nWas created")
         else:
